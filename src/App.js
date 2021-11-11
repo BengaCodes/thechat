@@ -10,6 +10,10 @@ import reducer, { initialState } from './state/reducer'
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState)
 
+  console.log('State from App: ', state)
+
+  // const { isLoggedIn } = state
+
   return (
     <BrowserRouter>
       <Context.Provider value={{ state, dispatch }}>

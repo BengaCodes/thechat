@@ -4,7 +4,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import LoginForm from '../../components/form'
 import 'react-toastify/dist/ReactToastify.css'
 import { useAppContext } from '../../hooks/useContext'
-import { addUser } from '../../state/actions'
+import { addUser, loginUser } from '../../state/actions'
 
 
 function Home() {
@@ -16,6 +16,8 @@ function Home() {
 
   const handleSubmit = e => {
     e.preventDefault()
+
+    dispatch(loginUser())
 
     toast.success(`Welcome to the chat app ${user}`)
 
