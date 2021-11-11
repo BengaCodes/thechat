@@ -1,19 +1,25 @@
-import { ADD_USER, LOGIN_USER } from './types'
+import { ADD_MESSAGE, ADD_USER, LOGIN_USER } from './types'
 
-export const initialState = { user: '', isLoggedIn: false }
+export const initialState = { user: '', message: '', isLoggedIn: false }
 
 
 const reducer = (state, action) => {
-  switch (action.type) {
+  const { type, payload } = action
+  switch (type) {
     case ADD_USER:
       return {
         ...state, 
-        user: action.payload,
+        user: payload,
       }
     case LOGIN_USER:
       return {
         ...state,
-        isLoggedIn: action.payload,
+        isLoggedIn: payload,
+      }
+    case ADD_MESSAGE:
+      return {
+        ...state,
+        message: payload,
       }
     default:
       return state

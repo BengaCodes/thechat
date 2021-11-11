@@ -12,13 +12,13 @@ function App() {
 
   console.log('State from App: ', state)
 
-  // const { isLoggedIn } = state
+  const { isLoggedIn } = state
 
   return (
     <BrowserRouter>
       <Context.Provider value={{ state, dispatch }}>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={isLoggedIn ? ChatPage : Home} />
           <ProtectRoute exact path="/chat" component={ChatPage} />
         </Switch>
       </Context.Provider>
