@@ -1,25 +1,23 @@
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Button } from 'reactstrap'
 import MessageBox from '../../components/messageBox'
 import MessageInput from '../../components/messageInput'
 import { useAppContext } from '../../hooks/useContext'
-import { addMessage, logoutUser } from '../../state/actions'
+import { addMessage, chatMessage, logoutUser } from '../../state/actions'
 import { HubConnectionBuilder } from '@microsoft/signalr'
 import { HUB_URL, sendMessage } from '../../lib'
-
-// const messages = [
-//   { user: 'Benga', message: 'Whats up bro' },
-//   { user: 'Abdul', message: 'Whats up broI am good bro and yourselfs?' }
-// ]
 
 
 
 function ChatPage() {
-  const [chats, setChats] = useState([])
   const [connection, setConnection] = useState(null)
-  const latestChat = useRef(null)
 
-  latestChat.current = chats
+  const { state: { user, message, chats, person }, dispatch } = useAppContext()
+
+  console.log(chats)
+
+  console.log('Person, ', person)
+
 
   useEffect(() => {
     const newConnection = new HubConnectionBuilder()
@@ -36,16 +34,14 @@ function ChatPage() {
         .then(() => {
           console.log('Connected marn!!')
           connection.on('ReceiveMessage', message => {
-            const updatedChat = [...latestChat.current]
-            updatedChat.push(message)
-
-            setChats(updatedChat)
+            console.log('Message: ', message)
+            dispatch(chatMessage(message))
           })
         }).catch(err => console.error('There has been a server error: ', err))
     }
-  }, [connection])
+  }, [connection, dispatch])
 
-  const { state: { user, message }, dispatch } = useAppContext()
+
 
   const handleChange = e => dispatch(addMessage(e.target.value))
 

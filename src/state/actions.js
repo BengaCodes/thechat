@@ -1,4 +1,4 @@
-import { ADD_MESSAGE, ADD_USER, LOGIN_USER, LOGOUT_USER } from './types'
+import { ADD_MESSAGE, ADD_USER, CHAT_MESSAGES, LOGIN_USER, LOGOUT_USER } from './types'
 
 export const addUser = user => {
   return {
@@ -25,5 +25,12 @@ export const addMessage = message => {
   return {
     type: ADD_MESSAGE,
     payload: message,
+  }
+}
+
+export const chatMessage = chat => {
+  return {
+    type: CHAT_MESSAGES,
+    payload: chat,
   }
 }
