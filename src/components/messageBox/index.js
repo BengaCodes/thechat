@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types'
-import { Card, CardBody, CardTitle, ListGroup } from 'reactstrap'
+import { Card, CardBody, CardSubtitle, CardTitle, ListGroup } from 'reactstrap'
 import Message from '../message'
 
-function MessageBox({ chat }) {
+function MessageBox({ chat, activeUsers }) {
   return (
-    <Card className="w-75 mt-5" color="success">
-      <CardTitle tag="h2">CHAT</CardTitle>
+    <Card className="w-75 mt-5" color="info">
+      <CardTitle tag="h2" className="text-center">CHAT</CardTitle>
+      <CardSubtitle className="text-center text-danger">There are {activeUsers} active users</CardSubtitle>
       <CardBody>
         <ListGroup>
           {
@@ -19,6 +20,7 @@ function MessageBox({ chat }) {
 
 MessageBox.propTypes = {
   chat: PropTypes.array.isRequired,
+  activeUsers: PropTypes.number.isRequired,
 }
 
 export default MessageBox

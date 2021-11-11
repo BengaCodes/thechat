@@ -30,7 +30,7 @@ function ChatPage() {
   return (
     <Fragment>
       <MessageInput handleSubmit={handleSubmit} handleChange={handleChange} />
-      <MessageBox chat={messages} />
+      <MessageBox chat={messages} activeUsers={[...new Set(messages.map(message => message.user))].length} />
     </Fragment>
   )
 }
