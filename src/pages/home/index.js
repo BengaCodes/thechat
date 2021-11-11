@@ -21,7 +21,7 @@ function Home() {
 
     toast.success(`Welcome to the chat app ${user}`)
 
-    setTimeout(() => history.push('/chat'), 3000)
+    setTimeout(() => history.push('/chat'), 5000)
   }
 
 

@@ -1,16 +1,18 @@
-import { useReducer } from 'react'
+import { useEffect, useReducer } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import ProtectRoute from './components/protectedRoute'
 import Context from './hooks/context'
 import ChatPage from './pages/chat'
 import Home from './pages/home'
-import reducer, { initialState } from './state/reducer'
+import reducer, { initializer, initialState } from './state/reducer'
 
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const [state, dispatch] = useReducer(reducer, initialState, initializer)
 
-  console.log('State from App: ', state)
+  useEffect(() => {
+    localStorage.setItem('chatState', JSON.stringify(state))
+  }, [state])
 
   const { isLoggedIn } = state
 

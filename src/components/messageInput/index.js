@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Card, CardBody, CardTitle, Form, Input, Label, FormGroup, Button } from 'reactstrap'
 
-function MessageInput({ handleChange, handleSubmit }) {
+function MessageInput({ handleChange, handleSubmit, message }) {
   return (
     <Fragment>
       <Card className="w-50">
@@ -18,6 +18,7 @@ function MessageInput({ handleChange, handleSubmit }) {
                 name="text"
                 type="textarea"
                 required
+                value={message}
                 onChange={handleChange}
               />
             </FormGroup>
