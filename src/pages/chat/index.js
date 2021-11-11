@@ -5,7 +5,7 @@ import MessageInput from '../../components/messageInput'
 import { useAppContext } from '../../hooks/useContext'
 import { addMessage, logoutUser } from '../../state/actions'
 import { HubConnectionBuilder } from '@microsoft/signalr'
-import { BASE_URL } from '../../lib'
+import { HUB_URL, sendMessage } from '../../lib'
 
 // const messages = [
 //   { user: 'Benga', message: 'Whats up bro' },
@@ -23,7 +23,7 @@ function ChatPage() {
 
   useEffect(() => {
     const newConnection = new HubConnectionBuilder()
-      .withUrl(BASE_URL)
+      .withUrl(HUB_URL)
       .withAutomaticReconnect()
       .build()
 
@@ -57,13 +57,21 @@ function ChatPage() {
       message,
     }
 
-    if (connection.connectionStarted) {
-      try {
-        await connection.send('SendMessage', newMessage)
-      } catch (err) {
-        console.error('There has been an error sending your message: ', err)
-      }
+    // if (connection.connectionStarted) {
+    //   try {
+    //     await connection.send('SendMessage', newMessage)
+    //   } catch (err) {
+    //     console.error('There has been an error sending your message: ', err)
+    //   }
+    // }
+
+    try {
+      await sendMessage(newMessage)
+    } catch (err) {
+      console.error('There has been an error sending your message: ', err)
     }
+
+    dispatch(addMessage(''))
   }
 
   const handleLogout = () => dispatch(logoutUser())
