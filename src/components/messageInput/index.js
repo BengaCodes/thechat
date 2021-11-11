@@ -17,6 +17,7 @@ function MessageInput({ handleChange, handleSubmit }) {
                 id="message"
                 name="text"
                 type="textarea"
+                required
                 onChange={handleChange}
               />
             </FormGroup>
